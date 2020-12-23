@@ -1,0 +1,73 @@
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+<mat-table [dataSource]="listdata" matSort >
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column
+     fullname:'',
+      email:'',
+      mobile:'',
+      city:'',
+     
+    -->
+    <ng-container matColumnDef="fullname">
+     <mat-header-cell *matHeaderCellDef mat-sort-header>fullname </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> mobile </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.mobile}} </mat-cell>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> city </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.city}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="departmentName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> departmentName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.departmentName}}</mat-cell>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef >actions</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+           <button mat-icon-button (click)="onEdit(row)" ><mat-icon>launch</mat-icon></button>
+           <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>   
+    <!-- <ng-container *matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan='6'>
+            ..loading
+      </mat-footer-cell>
+        </ng-container>
+   -->
+  
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+    <!-- <mat-footer-row *matFooterRowDef="['loading']"></mat-footer-row> -->
+</mat-table>
+ <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons></mat-paginator> 
+</div>
+  
